@@ -6,6 +6,7 @@
     <title>HBD Sayangku!</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <style>
+        * { box-sizing: border-box; }
         body {
             margin: 0;
             padding: 0;
@@ -18,187 +19,186 @@
             overflow: hidden;
         }
 
-        /* Layar Awal */
+        /* Overlay Tombol Start */
         #overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: white;
+            background: #ffffff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 100;
-            transition: 1s;
+            transition: 1s ease-in-out;
         }
 
         .btn-start {
-            padding: 15px 40px;
-            font-size: 1.1rem;
+            padding: 15px 35px;
+            font-size: 1.2rem;
             background: #ff85a2;
             color: white;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 133, 162, 0.3);
-            transition: 0.3s;
+            box-shadow: 0 8px 15px rgba(255, 133, 162, 0.4);
         }
 
-        .btn-start:hover {
-            transform: scale(1.1);
-            background: #ff4d6d;
-        }
-
-        /* Kartu Utama */
+        /* Kartu Ucapan */
         .card {
             background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(10px);
             padding: 30px;
             border-radius: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
-            max-width: 450px;
             width: 85%;
+            max-width: 450px;
             border: 2px solid #ffffff;
             display: none;
             opacity: 0;
-            transition: 2s;
-            z-index: 2;
-            max-height: 80vh;
+            transition: 1.5s;
+            z-index: 10;
+            max-height: 85vh;
             overflow-y: auto;
         }
 
         h1 {
             font-family: 'Caveat', cursive;
             color: #ff4d6d;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .message {
-            color: #576574;
-            line-height: 1.6;
-            font-size: 0.95rem;
-            text-align: center;
+            font-size: 2.3rem;
+            margin-bottom: 20px;
+            opacity: 0; /* Awalnya sembunyi */
+            transform: translateY(20px);
+            transition: 1.5s all ease;
         }
 
         .message p {
-            margin-bottom: 15px;
+            color: #576574;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            opacity: 0; /* Awalnya sembunyi */
+            transform: translateY(20px);
+            transition: 1.5s all ease;
         }
 
-        .heart-icon {
-            font-size: 40px;
-            display: inline-block;
-            animation: pulse 1.5s infinite;
+        /* Class untuk memicu munculnya teks */
+        .reveal {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
+        .signature {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: #ff85a2;
+            margin-top: 25px;
+            opacity: 0;
+            transition: 2s all ease;
         }
 
-        /* Dekorasi Gelembung */
+        /* Dekorasi */
         .bubble {
             position: absolute;
-            background: rgba(255, 255, 255, 0.4);
             border-radius: 50%;
             z-index: 1;
             bottom: -50px;
-            animation: rise 10s infinite ease-in;
+            animation: rise 8s infinite ease-in;
         }
 
         @keyframes rise {
-            from { bottom: -50px; opacity: 1; }
-            to { bottom: 100vh; opacity: 0; }
+            to { transform: translateY(-110vh); opacity: 0; }
         }
 
-        /* Custom Scrollbar */
-        .card::-webkit-scrollbar {
-            width: 5px;
+        .heart-beat {
+            font-size: 40px;
+            animation: beat 1s infinite alternate;
+            display: inline-block;
         }
-        .card::-webkit-scrollbar-thumb {
-            background: #ffdee9;
-            border-radius: 10px;
+
+        @keyframes beat {
+            to { transform: scale(1.2); }
         }
     </style>
 </head>
 <body>
 
     <div id="overlay">
-        <div style="font-size: 3rem; margin-bottom: 20px;">🎁</div>
-        <button class="btn-start" onclick="mulai()">Klik untuk Kejutan ✨</button>
+        <div class="heart-beat" style="margin-bottom: 20px;">🎁</div>
+        <button class="btn-start" onclick="mulai()">Klik Ini sayang ✨</button>
     </div>
 
     <audio id="lagu" loop>
-        <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Impact/Kevin_MacLeod_-_Heartwarming.mp3" type="audio/mpeg">
+        <source src="https://www.chosic.com/wp-content/uploads/2021/04/And-So-It-Begins-Inspired-By-Crush-Piano-Instrumental.mp3" type="audio/mpeg">
     </audio>
 
     <div class="card" id="mainCard">
-        <div class="heart-icon">💖</div>
-        <h1>Selamat ulang tahun sayangku cintaakuuu</h1>
+        <div class="heart-beat">💖</div>
+        <h1 id="title">Selamat ulang tahun sayangku cintaakuuu Adinda Meyka Putri</h1>
         
         <div class="message">
-            <p>
-                Aku mungkin belum bagus dalam merangkai kata tapi izinkan aku mencoba wkwkwk, harapan aku di umur kamu yang baru ini kamu semakin happy, selalu diberikan kesehatan, dan semua yang kamu inginkan bisa tercapai.
-            </p>
-
-            <p>
-                Jangan sering insec buang insec jauh jauh syuh syuh, jangan lama lama kalo marah sama aku ya ehehe, terus jangan pernah capek jadi diri kamu sendiri ya, karena aku suka kamu yang itu, yang suka manja manja, yang lucu, yang selalu bikin aku kangen.
-            </p>
-
-            <p>
-                Terimakasih dah hadir di hidup aku dan menjadi tempat ternyaman aku untuk pulang, aku juga tempat kamu untuk pulang kan? Kan? Kan? Pasti si wkwkwk. O iya aku juga pengan kamu tau kalo aku selalu mikirin kamu, doakan kamu, dan selalu ingin liat kamu bahagia.
-            </p>
-
-            <p><strong>
-                Aku sayang kamu, lebih dari sekedar yang bisa aku jelaskan dengan kata kata. Terimakasih sayang aku cinta kamu.
-            </strong></p>
+            <p class="para">Aku mungkin belum bagus dalam merangkai kata tapi izinkan aku mencoba wkwkwk, harapan aku di umur kamu yang baru ini kamu semakin happy, selalu diberikan kesehatan, dan semua yang kamu inginkan bisa tercapai.</p>
+            
+            <p class="para">Jangan sering insec buang insec jauh jauh syuh syuh, jangan lama lama kalo marah sama aku ya ehehe, terus jangan pernah capek jadi diri kamu sendiri ya, karena aku suka kamu yang itu, yang suka manja manja, yang lucu, yang selalu bikin aku kangen.</p>
+            
+            <p class="para">Terimakasih dah hadir di hidup aku dan menjadi tempat ternyaman aku untuk pulang, aku juga tempat kamu untuk pulang kan? Kan? Kan? Pasti si wkwkwk. O iya aku juga pengan kamu tau kalo aku selalu mikirin kamu, doakan kamu, dan selalu ingin liat kamu bahagia.</p>
+            
+            <p class="para"><strong>Aku sayang kamu, lebih dari sekedar yang bisa aku jelaskan dengan kata kata. Terimakasih sayang aku cinta kamu.</strong></p>
         </div>
 
-        <div style="color: #ff85a2; font-family: 'Caveat', cursive; font-size: 1.5rem; margin-top: 20px;">
-            With Love, [Nama Kamu]
-        </div>
+        <div class="signature" id="sig">— Always yours, [Nama Kamu] —</div>
     </div>
 
     <script>
         function mulai() {
-            // Putar Lagu
-            const lagu = document.getElementById('lagu');
-            lagu.play();
-
-            // Transisi Overlay
+            document.getElementById('lagu').play();
             document.getElementById('overlay').style.opacity = '0';
+            
             setTimeout(() => {
                 document.getElementById('overlay').style.display = 'none';
+                const card = document.getElementById('mainCard');
+                card.style.display = 'block';
+                setTimeout(() => card.style.opacity = '1', 100);
+                
+                // Mulai memunculkan teks satu per satu
+                revealText();
             }, 1000);
 
-            // Munculkan Kartu
-            const card = document.getElementById('mainCard');
-            card.style.display = 'block';
-            setTimeout(() => {
-                card.style.opacity = '1';
-            }, 100);
+            setInterval(createBubble, 500);
+        }
 
-            // Efek Dekorasi
-            setInterval(createBubble, 400);
+        function revealText() {
+            const title = document.getElementById('title');
+            const paras = document.querySelectorAll('.para');
+            const sig = document.getElementById('sig');
+            let delay = 1000;
+
+            // Judul muncul
+            setTimeout(() => title.classList.add('reveal'), delay);
+            
+            // Paragraf muncul bergiliran
+            paras.forEach((p, index) => {
+                delay += 2500; // Jeda antar paragraf (2.5 detik)
+                setTimeout(() => p.classList.add('reveal'), delay);
+            });
+
+            // Tanda tangan muncul terakhir
+            delay += 2000;
+            setTimeout(() => sig.classList.add('reveal'), delay);
         }
 
         function createBubble() {
-            const bubble = document.createElement('div');
-            bubble.className = 'bubble';
-            const size = Math.random() * 50 + 10 + 'px';
-            bubble.style.width = size;
-            bubble.style.height = size;
-            bubble.style.left = Math.random() * 100 + 'vw';
-            bubble.style.animationDuration = Math.random() * 5 + 5 + 's';
-            
-            // Perpaduan warna pink dan biru untuk gelembung
-            bubble.style.background = Math.random() > 0.5 ? '#ffdee9' : '#b5fffc';
-            
-            document.body.appendChild(bubble);
-            setTimeout(() => { bubble.remove(); }, 8000);
+            const bbl = document.createElement('div');
+            bbl.className = 'bubble';
+            const size = Math.random() * 40 + 10 + 'px';
+            bbl.style.width = size;
+            bbl.style.height = size;
+            bbl.style.left = Math.random() * 100 + 'vw';
+            bbl.style.background = Math.random() > 0.5 ? '#ffdee9' : '#b5fffc';
+            bbl.style.opacity = '0.6';
+            document.body.appendChild(bbl);
+            setTimeout(() => bbl.remove(), 8000);
         }
     </script>
 </body>
 </html>
-
